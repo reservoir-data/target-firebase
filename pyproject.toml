@@ -1,9 +1,9 @@
 [project]
 name = "target-firebase"
-version = "0.0.1"
+dynamic = ["version"]
 description = "Singer target for Firebase, built with the Meltano Singer SDK."
 authors = [{ name = "Edgar Ramírez-Mondragón", email = "edgarrm358@gmail.com" }]
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 readme = "README.md"
 license = "Apache-2.0"
 keywords = [
@@ -14,15 +14,13 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
     "firebase-admin~=6.6.0",
-    "singer-sdk[faker]~=0.43.1",
+    "singer-sdk[faker]~=0.44.0",
 ]
 license-files = ["LICENSE"]
 
@@ -35,14 +33,17 @@ target-firebase = "target_firebase.target:TargetFirebase.cli"
 [dependency-groups]
 dev = [
     "pytest>=8",
-    "singer-sdk[testing]~=0.43.1",
+    "singer-sdk[testing]~=0.44.0",
 ]
+
+[tool.hatch.version]
+source = "vcs"
 
 [tool.mypy]
 warn_unused_configs = true
 
 [tool.ruff]
-target-version = "py39"
+line-length = 100
 
 [tool.ruff.lint]
 ignore = [
@@ -57,5 +58,8 @@ allow-star-arg-any = true
 convention = "google"
 
 [build-system]
-requires = ["hatchling"]
+requires = [
+    "hatchling==1.27",
+    "hatch-vcs==0.4",
+]
 build-backend = "hatchling.build"

@@ -10,18 +10,18 @@ on:
     - .github/workflows/test.yml
     - target_firebase/**
     - tests/**
-    - poetry.lock
     - pyproject.toml
     - tox.ini
+    - uv.lock
   pull_request:
     branches: [main]
     paths:
     - .github/workflows/test.yml
     - target_firebase/**
     - tests/**
-    - poetry.lock
     - pyproject.toml
     - tox.ini
+    - uv.lock
   workflow_dispatch:
 
 env:
@@ -32,13 +32,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      max-parallel: 2
       matrix:
         python-version:
-        - "3.9"
-        - "3.10"
-        - "3.11"
-        - "3.12"
         - "3.13"
+        - "3.12"
+        - "3.11"
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
