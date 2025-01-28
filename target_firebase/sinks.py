@@ -13,7 +13,7 @@ if t.TYPE_CHECKING:
 class FirebaseSink(RecordSink):
     """Firebase target sink class."""
 
-    def __init__(self, *args: t.Any, **kwargs: t.Any) -> t.NoReturn:
+    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         """Initialize the sink."""
         super().__init__(*args, **kwargs)
         if len(self.key_properties) > 1:
@@ -31,11 +31,11 @@ class FirebaseSink(RecordSink):
         return self._db
 
     @db.setter
-    def db(self, db: Client) -> t.NoReturn:
+    def db(self, db: Client) -> None:
         """Set the Firestore client."""
         self._db = db
 
-    def process_record(self, record: dict, context: dict) -> t.NoReturn:  # noqa: ARG002
+    def process_record(self, record: dict, context: dict) -> None:  # noqa: ARG002
         """Process the record.
 
         Args:

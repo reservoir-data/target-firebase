@@ -40,7 +40,7 @@ class TargetFirebase(Target):
                     "client_email",
                     th.StringType,
                     required=True,
-                    description="The service account’s email.",
+                    description="The service account's email.",
                 ),
                 th.Property(
                     "token_uri",
@@ -52,9 +52,7 @@ class TargetFirebase(Target):
                     "project_id",
                     th.StringType,
                     required=True,
-                    description=(
-                        "Project ID associated with the service account credential."
-                    ),
+                    description="Project ID associated with the service account credential.",
                 ),
                 th.Property(
                     "universe_domain",
@@ -93,7 +91,7 @@ class TargetFirebase(Target):
         ),
     ).to_dict()
 
-    def __init__(self, *args: t.Any, **kwargs: t.Any) -> t.NoReturn:
+    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         """Initialize the target.
 
         Args:
