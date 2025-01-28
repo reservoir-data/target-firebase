@@ -36,4 +36,12 @@
 
   // https://docs.renovatebot.com/configuration-options/#reviewers
   "reviewers": ["edgarrmondragon"],
+
+  // https://docs.renovatebot.com/configuration-options/#packagerules
+  "packageRules": [
+    {
+      "matchManagers": ["pre-commit"],
+      "groupName": "pre-commit hooks",
+    },
+  ]
 }
