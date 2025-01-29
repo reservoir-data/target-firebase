@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       version: ${{ steps.baipp.outputs.package_version }}
     steps:
@@ -19,7 +19,7 @@ jobs:
 
   publish:
     name: Publish to PyPI
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [build]
     # https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment
     # https://docs.pypi.org/trusted-publishers/using-a-publisher/#github-actions
