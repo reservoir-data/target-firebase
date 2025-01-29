@@ -25,7 +25,7 @@ jobs:
     # https://docs.pypi.org/trusted-publishers/using-a-publisher/#github-actions
     environment:
       name: pypi
-      url: https://pypi.org/project/"target-firebase"/${{ steps.baipp.outputs.package_version }}
+      url: https://pypi.org/project/target-firebase/${{ steps.baipp.outputs.package_version }}
     if: startsWith(github.ref, 'refs/tags/')
     steps:
     - uses: actions/download-artifact@v4
