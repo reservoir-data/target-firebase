@@ -24,6 +24,7 @@ plugins:
   - name: target-firebase
     namespace: target_firebase
     pip_url: -e .
+    repo: https://github.com/edgarrmondragon/target-firebase
     capabilities:
     - about
     - stream-maps
