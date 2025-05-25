@@ -26,7 +26,7 @@ dependencies = [
 license-files = ["LICENSE"]
 
 [project.optional-dependencies]
-s3 = ["fs-s3fs~=1.1.1"]
+s3 = ["s3fs~=2025.5.0"]
 
 [project.scripts]
 target-firebase = "target_firebase.target:TargetFirebase.cli"
