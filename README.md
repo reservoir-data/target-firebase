@@ -77,8 +77,8 @@ Follow these instructions to contribute to this project.
 ### Initialize your Development Environment
 
 ```bash
-pipx install poetry
-poetry install
+curl -LsSf https://astral.sh/uv/install.sh | sh  # or see https://docs.astral.sh/uv/getting-started/installation/
+uv sync
 ```
 
 ### Create and Run Tests
@@ -87,13 +87,13 @@ Create tests within the `tests` subfolder and
   then run:
 
 ```bash
-poetry run pytest
+uv run pytest
 ```
 
-You can also test the `target-firebase` CLI interface directly using `poetry run`:
+You can also test the `target-firebase` CLI interface directly using `uv run`:
 
 ```bash
-poetry run target-firebase --help
+uv run target-firebase --help
 ```
 
 ### Testing with [Meltano](https://meltano.com/)

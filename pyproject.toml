@@ -64,3 +64,22 @@ requires = [
     "hatch-vcs==0.4",
 ]
 build-backend = "hatchling.build"
+
+[tool.tox]
+min_version = "4.22"
+env_list = [
+  "py314",
+  "py313",
+  "py312",
+  "py311",
+]
+requires = [
+    "tox>=4.22",
+    "tox-uv",
+]
+
+[tool.tox.env_run_base]
+runner = "uv-venv-lock-runner"
+pass_env = [ "TARGET_FIREBASE_*" ]
+dependency_groups = [ "dev" ]
+commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
