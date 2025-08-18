@@ -21,7 +21,7 @@ classifiers = [
 ]
 dependencies = [
     "firebase-admin~=7.1.0",
-    "singer-sdk[faker]~=0.47.3",
+    "singer-sdk[faker]~=0.48.0",
 ]
 license-files = ["LICENSE"]
 
@@ -34,7 +34,7 @@ target-firebase = "target_firebase.target:TargetFirebase.cli"
 [dependency-groups]
 dev = [
     "pytest>=8",
-    "singer-sdk[testing]~=0.47.3",
+    "singer-sdk[testing]~=0.48.0",
 ]
 
 [tool.hatch.version]
