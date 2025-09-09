@@ -3,7 +3,7 @@ name = "target-firebase"
 dynamic = ["version"]
 description = "Singer target for Firebase, built with the Meltano Singer SDK."
 authors = [{ name = "Edgar Ramírez-Mondragón", email = "edgarrm358@gmail.com" }]
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 readme = "README.md"
 license = "Apache-2.0"
 keywords = [
@@ -14,7 +14,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
@@ -71,7 +70,6 @@ env_list = [
   "py314",
   "py313",
   "py312",
-  "py311",
 ]
 requires = [
     "tox>=4.22",
