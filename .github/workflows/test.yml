@@ -35,7 +35,7 @@ jobs:
       max-parallel: 2
       matrix:
         python-version:
-        # - "3.14"  # https://github.com/grpc/grpc/issues/39506
+        - "3.14"
         - "3.13"
         - "3.12"
     steps:

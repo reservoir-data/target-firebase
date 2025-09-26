@@ -33,7 +33,7 @@ target-firebase = "target_firebase.target:TargetFirebase.cli"
 [dependency-groups]
 dev = [
     "pytest>=8",
-    "singer-sdk[testing]~=0.48.0",
+    "singer-sdk[testing]",
 ]
 
 [tool.hatch.version]
