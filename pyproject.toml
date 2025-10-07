@@ -20,7 +20,7 @@ classifiers = [
 ]
 dependencies = [
     "firebase-admin~=7.1.0",
-    "singer-sdk[faker]~=0.49.1",
+    "singer-sdk[faker]~=0.50.1",
 ]
 license-files = ["LICENSE"]
 
