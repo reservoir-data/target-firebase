@@ -19,7 +19,7 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
-    "firebase-admin~=7.2.0",
+    "firebase-admin~=7.3.0",
     "singer-sdk[faker]~=0.54.0a4",
 ]
 license-files = ["LICENSE"]
