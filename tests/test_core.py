@@ -5,7 +5,6 @@ from __future__ import annotations
 import typing as t
 import uuid
 
-import pytest
 from singer_sdk.testing import get_target_test_class
 
 from target_firebase.target import TargetFirebase
@@ -22,17 +21,5 @@ StandardTargetTests = get_target_test_class(
 )
 
 
-class TestTargetFirebase(StandardTargetTests):  # type: ignore[misc, valid-type]
+class TestTargetFirebase(StandardTargetTests):  # type: ignore[misc, valid-type]  # ty:ignore[unsupported-base]
     """Standard Target Tests."""
-
-    @pytest.fixture(scope="class")
-    def resource(self):  # noqa: ANN201
-        """Generic external resource.
-
-        This fixture is useful for setup and teardown of external resources,
-        such output folders, tables, buckets etc. for use during testing.
-
-        Example usage can be found in the SDK samples test suite:
-        https://github.com/meltano/sdk/tree/main/tests/samples
-        """
-        return "resource"

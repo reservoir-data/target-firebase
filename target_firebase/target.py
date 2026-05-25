@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import typing as t
+from typing import Any, cast
 
 import firebase_admin
 from firebase_admin import credentials, firestore
@@ -91,7 +91,7 @@ class TargetFirebase(Target):
         ),
     ).to_dict()
 
-    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize the target.
 
         Args:
@@ -100,23 +100,23 @@ class TargetFirebase(Target):
         """
         super().__init__(*args, **kwargs)
         if credential := self.config.get("credential"):
-            cred = credentials.Certificate(credential)
+            cred = credentials.Certificate(credential)  # type: ignore[no-untyped-call]
         elif credential_file := self.config.get("credential_file"):
-            cred = credentials.Certificate(credential_file)
+            cred = credentials.Certificate(credential_file)  # type: ignore[no-untyped-call]
         else:
-            cred = credentials.ApplicationDefault()
+            cred = credentials.ApplicationDefault()  # type: ignore[assignment,no-untyped-call]
 
         try:
-            _app = firebase_admin.get_app(name=self.config.get("firebase_app"))
+            _app = firebase_admin.get_app(name=self.config.get("firebase_app"))  # type: ignore[no-untyped-call]
         except ValueError:
-            _app = firebase_admin.initialize_app(
+            _app = firebase_admin.initialize_app(  # type: ignore[no-untyped-call]
                 credential=cred,
                 name=self.config.get("firebase_app"),
             )
 
         self.db = firestore.client(app=_app, database_id=self.config.get("database_id"))
 
-    def get_sink(self, *args: t.Any, **kwargs: t.Any) -> FirebaseSink:
+    def get_sink(self, *args: Any, **kwargs: Any) -> FirebaseSink:
         """Return a new instance of a Firebase sink.
 
         Args:
@@ -126,7 +126,7 @@ class TargetFirebase(Target):
         Returns:
             FirebaseSink: A new instance of FirebaseSink.
         """
-        sink = super().get_sink(*args, **kwargs)
+        sink = cast("FirebaseSink", super().get_sink(*args, **kwargs))
         sink.db = self.db
         return sink
 

@@ -2,18 +2,19 @@
 
 from __future__ import annotations
 
-import typing as t
+from typing import TYPE_CHECKING, Any, override
 
 from singer_sdk.sinks import RecordSink
 
-if t.TYPE_CHECKING:
+if TYPE_CHECKING:
     from google.cloud.firestore_v1 import Client
+    from singer_sdk.helpers.types import Context, Record
 
 
 class FirebaseSink(RecordSink):
     """Firebase target sink class."""
 
-    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize the sink."""
         super().__init__(*args, **kwargs)
         if len(self.key_properties) > 1:
@@ -35,7 +36,8 @@ class FirebaseSink(RecordSink):
         """Set the Firestore client."""
         self._db = db
 
-    def process_record(self, record: dict, context: dict) -> None:  # noqa: ARG002
+    @override
+    def process_record(self, record: Record, context: Context | None) -> None:
         """Process the record.
 
         Args:
