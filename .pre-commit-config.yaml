@@ -12,15 +12,10 @@ repos:
   - id: end-of-file-fixer
   - id: trailing-whitespace
 
-- repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.37.1
+- repo: https://github.com/tox-dev/pyproject-fmt
+  rev: v2.21.2
   hooks:
-  - id: check-github-workflows
-  - id: check-meltano
-  - id: check-renovate
-    language: python
-    additional_dependencies:
-    - pyjson5==2.0.0
+  - id: pyproject-fmt
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
   rev: v0.15.12
@@ -35,9 +30,17 @@ repos:
   - id: uv-lock
   - id: uv-sync
 
-- repo: https://github.com/pre-commit/mirrors-mypy
-  rev: v1.20.2
+- repo: https://github.com/python-jsonschema/check-jsonschema
+  rev: 0.37.2
   hooks:
-  - id: mypy
+  - id: check-github-workflows
+  - id: check-meltano
+  - id: check-renovate
+    language: python
     additional_dependencies:
-    - sqlalchemy-stubs
+    - pyjson5==2.0.0
+
+- repo: https://github.com/hukkin/mdformat
+  rev: 1.0.0
+  hooks:
+  - id: mdformat

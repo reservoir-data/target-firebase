@@ -21,6 +21,7 @@ uv tool install git+https://github.com/ORG_NAME/target-firebase.git@main
 ## Configuration
 
 ### Accepted Config Options
+
 | Setting | Required | Default | Description |
 |:--------|:--------:|:-------:|:------------|
 | credential_file | False | None | The path to the Google Cloud Firestore credential file. If none is provided, Google Application Default Credentials are used. |
@@ -86,7 +87,7 @@ uv sync
 ### Create and Run Tests
 
 Create tests within the `tests` subfolder and
-  then run:
+then run:
 
 ```bash
 uv run pytest
@@ -112,6 +113,7 @@ uvx meltano invoke tap-firebase --version
 # OR run a test `elt` pipeline:
 uvx meltano run tap-firebase target-jsonl
 ```
+
 ### SDK Dev Guide
 
 See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the Meltano Singer SDK to
