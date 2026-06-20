@@ -79,20 +79,20 @@ DEP002 = [ "s3fs" ]
 table_format = "long"
 
 [tool.mypy]
+follow_untyped_imports = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_return_any = true
+warn_unreachable = true
 enable_error_code = [
   "exhaustive-match",
   "ignore-without-code",
   "redundant-expr",
   "truthy-bool",
 ]
-follow_untyped_imports = true
 strict = true
-warn_no_return = true
-warn_redundant_casts = true
-warn_return_any = true
-warn_unreachable = true
 warn_unused_configs = true
-warn_unused_ignores = true
 
 [tool.pytest]
 addopts = [ "-v", "-ra" ]
@@ -116,21 +116,21 @@ env_list = [
 ]
 [tool.tox.env.dependencies]
 description = "check for unused, missing and transitive dependencies"
-labels = [ "check" ]
 dependency_groups = [ "testing" ]
 commands = [ [ "deptry", "." ] ]
+labels = [ "check" ]
 [tool.tox.env.typing]
 description = "type checks"
-labels = [ "check" ]
 dependency_groups = [ "typing" ]
 commands = [
   [ "mypy", "target_firebase", "tests" ],
   [ "ty", "check", "target_firebase", "tests" ],
 ]
+labels = [ "check" ]
 
 [tool.tox.env_run_base]
-description = "run tests on Python {py_dot_ver}"
 runner = "uv-venv-lock-runner"
-pass_env = [ "TARGET_FIREBASE_*" ]
+description = "run tests on Python {py_dot_ver}"
 dependency_groups = [ "dev" ]
+pass_env = [ "TARGET_FIREBASE_*" ]
 commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
