@@ -26,7 +26,7 @@ classifiers = [
 dynamic = [ "version" ]
 dependencies = [
   "firebase-admin~=7.4.0",
-  "singer-sdk[faker]~=0.54.2",
+  "singer-sdk[faker]~=0.54.5",
 ]
 [[project.authors]]
 name = "Edgar Ramírez-Mondragón"
@@ -38,17 +38,17 @@ target-firebase = "target_firebase.target:TargetFirebase.cli"
 
 [dependency-groups]
 dev = [
+  "deptry>=0.25",
   { include-group = "testing" },
   { include-group = "typing" },
 ]
 testing = [
-  "deptry>=0.24",
   "pytest>=9",
   "singer-sdk[testing]",
 ]
 typing = [
   "mypy>=2.1",
-  "ty>=0.0.38",
+  "ty>=0.0.50",
   { include-group = "testing" },
 ]
 
@@ -69,9 +69,7 @@ allow-star-arg-any = true
 convention = "google"
 
 [tool.deptry.package_module_name_map]
-mypy = "mypy"
 s3fs = "s3fs"
-ty = "ty"
 [tool.deptry.per_rule_ignores]
 DEP002 = [ "s3fs" ]
 
@@ -116,7 +114,7 @@ env_list = [
 ]
 [tool.tox.env.dependencies]
 description = "check for unused, missing and transitive dependencies"
-dependency_groups = [ "testing" ]
+dependency_groups = [ "dev" ]
 commands = [ [ "deptry", "." ] ]
 labels = [ "check" ]
 [tool.tox.env.typing]
