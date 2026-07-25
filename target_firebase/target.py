@@ -1,8 +1,10 @@
+# Copyright (c) 2026 Edgar-Ramírez Mondragón
+
 """Firebase target class."""
 
 from __future__ import annotations
 
-from typing import Any, cast
+from typing import Any, cast, override
 
 import firebase_admin
 from firebase_admin import credentials, firestore
@@ -107,15 +109,16 @@ class TargetFirebase(Target):
             cred = credentials.ApplicationDefault()  # type: ignore[assignment,no-untyped-call]
 
         try:
-            _app = firebase_admin.get_app(name=self.config.get("firebase_app"))  # type: ignore[no-untyped-call]
+            app = firebase_admin.get_app(name=self.config.get("firebase_app"))  # type: ignore[no-untyped-call]
         except ValueError:
-            _app = firebase_admin.initialize_app(  # type: ignore[no-untyped-call]
+            app = firebase_admin.initialize_app(  # type: ignore[no-untyped-call]
                 credential=cred,
                 name=self.config.get("firebase_app"),
             )
 
-        self.db = firestore.client(app=_app, database_id=self.config.get("database_id"))
+        self.db = firestore.client(app=app, database_id=self.config.get("database_id"))
 
+    @override
     def get_sink(self, *args: Any, **kwargs: Any) -> FirebaseSink:
         """Return a new instance of a Firebase sink.
 

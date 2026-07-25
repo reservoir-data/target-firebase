@@ -1,3 +1,5 @@
+# Copyright (c) 2026 Edgar-Ramírez Mondragón
+
 """Firebase target sink class, which handles writing streams."""
 
 from __future__ import annotations
@@ -25,7 +27,11 @@ class FirebaseSink(RecordSink):
 
     @property
     def db(self) -> Client:
-        """Return the Firestore client."""
+        """The Firestore client.
+
+        Raises:
+            ValueError: If the client is not initialized.
+        """
         if self._db is None:
             msg = "Firestore client not initialized"
             raise ValueError(msg)
