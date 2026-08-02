@@ -13,7 +13,7 @@ repos:
   - id: trailing-whitespace
 
 - repo: https://github.com/tox-dev/pyproject-fmt
-  rev: v2.25.1
+  rev: v2.25.3
   hooks:
   - id: pyproject-fmt
 
@@ -31,7 +31,7 @@ repos:
   - id: uv-sync
 
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.37.3
+  rev: 0.37.4
   hooks:
   - id: check-github-workflows
   - id: check-meltano
@@ -46,6 +46,6 @@ repos:
   - id: mdformat
 
 - repo: https://github.com/crate-ci/typos
-  rev: v1.47.2
+  rev: v1.48.0
   hooks:
   - id: typos
