@@ -4,6 +4,8 @@
 
 from __future__ import annotations
 
+import datetime as dt
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, override
 
 from singer_sdk.sinks import RecordSink
@@ -50,8 +52,33 @@ class FirebaseSink(RecordSink):
             record: Individual record in the stream.
             context: Stream partition or context dictionary.
         """
+        record = _conform_record(record)
+
         if len(self.key_properties) == 1:
             self.db.collection("cities").document(self.key_properties[0]).set(record)
             return
 
         self.db.collection("cities").add(record)
+
+
+def _conform_record(record: Record) -> Record:
+    """Conform the record to something Firestore can accept.
+
+    Valid types are handled in https://github.com/googleapis/google-cloud-python/blob/3bbcbdf1a62dd10ab96f72e5c8198cffe9174ac7/packages/google-cloud-firestore/google/cloud/firestore_v1/_helpers.py#L166-L231.
+
+    Args:
+        record: The record to conform.
+
+    Returns:
+        The conformed record.
+    """
+    conformed_record: Record = {}
+    for key, value in record.items():
+        if isinstance(value, (bool, int, float, dt.datetime, str, list, Mapping)) or value is None:
+            conformed_record[key] = value
+        elif isinstance(value, (dt.date, dt.time)):
+            conformed_record[key] = value.isoformat()
+        else:
+            conformed_record[key] = str(value)
+
+    return conformed_record
