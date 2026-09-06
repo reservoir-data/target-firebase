@@ -70,10 +70,10 @@ allow-star-arg-any = true
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
-[tool.deptry.package_module_name_map]
-s3fs = "s3fs"
 [tool.deptry.per_rule_ignores]
 DEP002 = [ "s3fs" ]
+[tool.deptry.package_module_name_map]
+s3fs = "s3fs"
 
 [tool.pyproject-fmt]
 table_format = "long"
