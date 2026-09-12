@@ -4,7 +4,7 @@
 
 from __future__ import annotations
 
-from typing import Any, cast, override
+from typing import TYPE_CHECKING, Any, override
 
 import firebase_admin
 from firebase_admin import credentials, firestore
@@ -12,6 +12,9 @@ from singer_sdk import typing as th
 from singer_sdk.target_base import Target
 
 from target_firebase.sinks import FirebaseSink
+
+if TYPE_CHECKING:
+    from singer_sdk.singerlib.types import KeyProperties
 
 
 class TargetFirebase(Target):
@@ -81,6 +84,7 @@ class TargetFirebase(Target):
             th.StringType,
             description="The name of the Firebase app to use.",
             default="[DEFAULT]",
+            nullable=False,
         ),
         th.Property(
             "database_id",
@@ -109,31 +113,27 @@ class TargetFirebase(Target):
             cred = credentials.ApplicationDefault()  # type: ignore[assignment,no-untyped-call]
 
         try:
-            app = firebase_admin.get_app(name=self.config.get("firebase_app"))  # type: ignore[no-untyped-call]
+            app = firebase_admin.get_app(name=self.config["firebase_app"])  # type: ignore[no-untyped-call]
         except ValueError:
-            app = firebase_admin.initialize_app(  # type: ignore[no-untyped-call]
-                credential=cred,
-                name=self.config.get("firebase_app"),
-            )
+            app = firebase_admin.initialize_app(credential=cred, name=self.config["firebase_app"])  # type: ignore[no-untyped-call]
 
         self.db = firestore.client(app=app, database_id=self.config.get("database_id"))
 
     @override
-    def get_sink(self, *args: Any, **kwargs: Any) -> FirebaseSink:
-        """Return a new instance of a Firebase sink.
-
-        Args:
-            *args: Variable length argument list.
-            **kwargs: Arbitrary keyword arguments.
-
-        Returns:
-            FirebaseSink: A new instance of FirebaseSink.
-        """
-        sink = cast("FirebaseSink", super().get_sink(*args, **kwargs))
-        sink.db = self.db
-        return sink
-
-    default_sink_class = FirebaseSink
+    def create_sink(
+        self,
+        *,
+        stream_name: str,
+        schema: dict[str, Any],
+        key_properties: KeyProperties | None = None,
+    ) -> FirebaseSink:
+        return FirebaseSink(
+            target=self,
+            stream_name=stream_name,
+            schema=schema,
+            key_properties=key_properties,
+            db=self.db,
+        )
 
 
 if __name__ == "__main__":
