@@ -41,13 +41,14 @@ class FirebaseSink(RecordSink):
             context: Stream partition or context dictionary.
         """
         record = _conform_record(record)
+        collection = self.stream_name.split("-")
 
         if len(self.key_properties) == 1:
             record_id = str(record[self.key_properties[0]])
-            self.db.collection(self.stream_name).document(record_id).set(record)
+            self.db.collection(*collection).document(record_id).set(record)
             return
 
-        self.db.collection(self.stream_name).add(record)
+        self.db.collection(*collection).add(record)
 
 
 def _conform_record(record: Record) -> Record:
