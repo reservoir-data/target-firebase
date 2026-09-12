@@ -55,10 +55,10 @@ class FirebaseSink(RecordSink):
         record = _conform_record(record)
 
         if len(self.key_properties) == 1:
-            self.db.collection("cities").document(self.key_properties[0]).set(record)
+            self.db.collection(self.stream_name).document(self.key_properties[0]).set(record)
             return
 
-        self.db.collection("cities").add(record)
+        self.db.collection(self.stream_name).add(record)
 
 
 def _conform_record(record: Record) -> Record:
