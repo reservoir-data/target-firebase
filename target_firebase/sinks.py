@@ -18,31 +18,19 @@ if TYPE_CHECKING:
 class FirebaseSink(RecordSink):
     """Firebase target sink class."""
 
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, *args: Any, db: Client, **kwargs: Any) -> None:
         """Initialize the sink."""
         super().__init__(*args, **kwargs)
         if len(self.key_properties) > 1:
             msg = "Composite keys are not supported"
             raise NotImplementedError(msg)
 
-        self._db: Client | None = None
+        self._db: Client = db
 
     @property
     def db(self) -> Client:
-        """The Firestore client.
-
-        Raises:
-            ValueError: If the client is not initialized.
-        """
-        if self._db is None:
-            msg = "Firestore client not initialized"
-            raise ValueError(msg)
+        """The Firestore client."""
         return self._db
-
-    @db.setter
-    def db(self, db: Client) -> None:
-        """Set the Firestore client."""
-        self._db = db
 
     @override
     def process_record(self, record: Record, context: Context | None) -> None:
@@ -55,7 +43,8 @@ class FirebaseSink(RecordSink):
         record = _conform_record(record)
 
         if len(self.key_properties) == 1:
-            self.db.collection(self.stream_name).document(self.key_properties[0]).set(record)
+            record_id = str(record[self.key_properties[0]])
+            self.db.collection(self.stream_name).document(record_id).set(record)
             return
 
         self.db.collection(self.stream_name).add(record)
