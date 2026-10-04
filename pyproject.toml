@@ -24,7 +24,7 @@ classifiers = [
 ]
 dynamic = [ "version" ]
 dependencies = [
-  "firebase-admin~=7.5.0",
+  "firebase-admin~=7.7.0",
   "singer-sdk[faker]~=0.55.0a9",
 ]
 [[project.authors]]
