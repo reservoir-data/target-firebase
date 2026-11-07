@@ -13,7 +13,7 @@ concurrency:
 jobs:
   build:
     name: Build Wheel and Source Distribution
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     outputs:
       name: ${{ steps.baipp.outputs.package_name }}
       version: ${{ steps.baipp.outputs.package_version }}
@@ -26,7 +26,7 @@ jobs:
 
   publish:
     name: Publish to PyPI
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: [build]
     # https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment
     # https://docs.pypi.org/trusted-publishers/using-a-publisher/#github-actions
